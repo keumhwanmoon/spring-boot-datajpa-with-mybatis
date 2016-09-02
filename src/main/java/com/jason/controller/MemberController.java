@@ -3,6 +3,7 @@ package com.jason.controller;
 import com.jason.entity.Member;
 import com.jason.entity.mybatis.MemberMapper;
 import com.jason.repository.MemberRepository;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +17,34 @@ import java.util.List;
  */
 @Controller
 public class MemberController {
+
     @Autowired
     private MemberMapper memberMapper;
 
     @Autowired
     private MemberRepository memberRepository;
 
-    @RequestMapping(value = "/members")
+    @Autowired
+    private SqlSession sqlSession;
+
+    @RequestMapping(value = "/m/members")
     @ResponseBody
     public List<Member> findMembers() {
+        return sqlSession.selectList("Member.selectList");
+    }
+
+    @RequestMapping(value = "/mx/members")
+    @ResponseBody
+    public List<Member> findMembersXML() {
         return memberMapper.findMember();
     }
+
+    @RequestMapping(value = "/j/members")
+    @ResponseBody
+    public List<Member> findMemberJPA() {
+        return memberRepository.findAll();
+    }
+
 
     @RequestMapping(value = "/m/insert")
     @ResponseBody

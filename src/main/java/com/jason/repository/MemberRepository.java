@@ -2,7 +2,10 @@ package com.jason.repository;
 
 import com.jason.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author jason, Moon
@@ -10,4 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
+    @Query(value = "SELECT id, name FROM Member", nativeQuery = true)
+    public List<Member> findMember();
 }
