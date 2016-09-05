@@ -25,6 +25,10 @@ public class MemberService {
         return repository.findAll();
     }
 
+    public List<Member> findMembers(String name) {
+        return repository.findMembers(name);
+    }
+
     public Member saveMember(Member member) {
         return repository.save(member);
     }

@@ -1,6 +1,5 @@
 package com.jason.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +14,6 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member {
 
     public Member(String name) {
