@@ -17,6 +17,11 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
+
+    public Member(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

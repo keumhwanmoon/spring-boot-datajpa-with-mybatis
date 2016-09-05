@@ -1,11 +1,10 @@
 package com.jason.controller;
 
 import com.jason.entity.Member;
-import com.jason.entity.mybatis.MemberMapper;
-import com.jason.repository.MemberRepository;
-import org.apache.ibatis.session.SqlSession;
+import com.jason.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,46 +18,30 @@ import java.util.List;
 public class MemberController {
 
     @Autowired
-    private MemberMapper memberMapper;
+    MemberService memberService;
 
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private SqlSession sqlSession;
-
-    @RequestMapping(value = "/m/members")
+    @RequestMapping
     @ResponseBody
     public List<Member> findMembers() {
-        return sqlSession.selectList("Member.selectList");
+        return memberService.findMembers();
     }
 
-    @RequestMapping(value = "/mx/members")
+    @RequestMapping(value = "/insertMember")
     @ResponseBody
-    public List<Member> findMembersXML() {
-        return memberMapper.findMember();
+    public void saveMember() throws Exception {
+
+        Member member = new Member("멤버1");
+
+        memberService.insertMember(member);
     }
 
-    @RequestMapping(value = "/j/members")
+    @RequestMapping(value = "/saveMember")
     @ResponseBody
-    public List<Member> findMemberJPA() {
-        return memberRepository.findAll();
-    }
+    public Member insertMember() {
+        Member member = new Member("멤버2");
 
+        memberService.saveMember(member);
 
-    @RequestMapping(value = "/m/insert")
-    @ResponseBody
-    public Member insert() {
-        Member member = new Member(1L, "멤버1");
-        memberMapper.insertMember(member);
-        return member;
-    }
-
-    @RequestMapping(value = "/j/insert")
-    @ResponseBody
-    public Member insertj() {
-        Member member = new Member(2L, "멤버2");
-        memberRepository.save(member);
         return member;
     }
 }

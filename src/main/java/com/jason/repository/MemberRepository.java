@@ -13,6 +13,4 @@ import java.util.List;
  */
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "SELECT id, name FROM Member", nativeQuery = true)
-    public List<Member> findMember();
 }

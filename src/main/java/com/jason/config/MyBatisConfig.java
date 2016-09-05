@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 2016. 9. 2.
  */
 @Configuration
-@MapperScan(value = "com.jason.entity.mybatis")
+@MapperScan(value = "com.jason.mapper")
 public class MyBatisConfig {
 }

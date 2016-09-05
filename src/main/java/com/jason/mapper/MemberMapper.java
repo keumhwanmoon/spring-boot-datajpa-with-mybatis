@@ -1,11 +1,8 @@
-package com.jason.entity.mybatis;
+package com.jason.mapper;
 
 import com.jason.entity.Member;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 /**
  * @author jason, Moon
@@ -13,9 +10,8 @@ import java.util.List;
  */
 @Mapper
 public interface MemberMapper {
-    @Select("Select * from Member")
-    List<Member> findMember();
+    String INSERT_QUERY= "INSERT INTO MEMBER (name) VALUES(#{name})";
 
-    @Insert("Insert into Member values (#{id}, #{name})")
+    @Insert(INSERT_QUERY)
     void insertMember(Member member);
 }
